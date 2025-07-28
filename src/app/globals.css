@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Avenir Next Cyr fonts */
+@font-face {
+    font-family: 'Avenir Next Cyr';
+    src: url('/fonts/avenir/AvenirNextCyr-Light.woff2') format('woff2'),
+        url('/fonts/avenir/AvenirNextCyr-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir Next Cyr';
+    src: url('/fonts/avenir/AvenirNextCyr-Regular.woff2') format('woff2'),
+        url('/fonts/avenir/AvenirNextCyr-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir Next Cyr';
+    src: url('/fonts/avenir/AvenirNextCyr-Medium.woff2') format('woff2'),
+        url('/fonts/avenir/AvenirNextCyr-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir Next Cyr';
+    src: url('/fonts/avenir/AvenirNextCyr-Bold.woff2') format('woff2'),
+        url('/fonts/avenir/AvenirNextCyr-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir Next Cyr';
+    src: url('/fonts/avenir/AvenirNextCyr-Thin.woff2') format('woff2'),
+        url('/fonts/avenir/AvenirNextCyr-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Reset and viewport fixes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Avenir Next Cyr', 'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: 'Avenir Next Cyr', 'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Ensure all elements respect viewport */
+#__next {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Mobile optimization for logos */
+@media (max-width: 768px) {
+  .logo-mobile {
+    width: 140px !important;
+    height: 42px !important;
+  }
+  
+  .hackathon-logo-mobile {
+    transform: scale(0.7);
+    transform-origin: left center;
+  }
+  
+  .header-mobile {
+    padding: 0.5rem 1rem !important;
+  }
+  
+  .content-mobile {
+    padding-left: 1rem !important;
+    gap: 1rem !important;
+  }
+  
+  .title-mobile {
+    font-size: 2rem !important;
+  }
+  
+  .subtitle-mobile {
+    font-size: 1rem !important;
+  }
+  
+  .logo-container-mobile {
+    width: 80vw !important;
+    min-width: 80vw !important;
+  }
+  
+  /* Decorative SVG optimization */
+  .svg-decorative-mobile {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+  
+  /* Day cards mobile optimization */
+  .day-card-mobile {
+    padding: 1rem !important;
+  }
+  
+  .day-title-mobile {
+    font-size: 1.8rem !important;
+  }
+  
+  .day-subtitle-mobile {
+    font-size: 0.9rem !important;
+  }
+  
+  /* Intro section mobile optimization */
+  .intro-title-mobile {
+    font-size: 1.6rem !important;
+  }
+  
+  .intro-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Agenda overlay mobile optimization */
+  .agenda-title-mobile {
+    font-size: 1.6rem !important;
+  }
+  
+  .agenda-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .agenda-subtitle-mobile {
+    font-size: 1.4rem !important;
+  }
+  
+  .agenda-event-title-mobile {
+    font-size: 1.2rem !important;
+  }
+  
+  .agenda-event-description-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .agenda-event-speaker-mobile {
+    font-size: 1rem !important;
+  }
+  
+  /* Panel content mobile optimization */
+  .panel-title-mobile {
+    font-size: 1.6rem !important;
+  }
+  
+  .panel-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Panel grid mobile optimization */
+  .panel-grid-mobile {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+  
+  /* Hero section mobile optimization */
+  .hero-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Location section mobile optimization */
+  .location-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Speakers section mobile optimization */
+  .speakers-title-mobile {
+    font-size: 1.6rem !important;
+  }
+  
+  .speakers-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .speakers-grid-mobile {
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Brief section mobile optimization */
+  .brief-title-mobile {
+    font-size: 1.6rem !important;
+  }
+  
+  .brief-text-mobile {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .brief-grid-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Brief modal mobile optimization */
+  .brief-modal-header-mobile {
+    padding: 2rem 1.5rem 1.5rem 1.5rem !important;
+  }
+  
+  .brief-modal-title-mobile {
+    font-size: 4rem !important;
+  }
+  
+  .brief-modal-subtitle-mobile {
+    font-size: 2.5rem !important;
+  }
+  
+  .brief-modal-description-mobile {
+    font-size: 1.8rem !important;
+  }
+  
+  .brief-modal-content-mobile {
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .brief-modal-description-title-mobile {
+    font-size: 1.8rem !important;
+  }
+  
+  .brief-modal-description-text-mobile {
+    font-size: 1.3rem !important;
+  }
+  
+  .brief-modal-cards-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  .brief-modal-card-mobile {
+    padding: 1.5rem !important;
+  }
+  
+  .brief-modal-card-title-mobile {
+    font-size: 1.2rem !important;
+  }
+  
+  .brief-modal-card-text-mobile {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Agenda modal mobile optimization */
+  .agenda-modal-content-mobile {
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .agenda-modal-layout-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 0 !important;
+  }
+  
+  .agenda-modal-left-section-mobile {
+    position: static !important;
+    padding: 0 !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .agenda-modal-day-banner-mobile {
+    padding: 0.8rem 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .agenda-modal-day-title-mobile {
+    font-size: 2rem !important;
+  }
+  
+  .agenda-modal-day-of-week-mobile {
+    font-size: 2.2rem !important;
+    margin-top: 1rem !important;
+  }
+  
+  .agenda-modal-date-mobile {
+    font-size: 1.2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .agenda-modal-subtitle-mobile {
+    font-size: 1.4rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .agenda-modal-info-mobile {
+    font-size: 0.9rem !important;
+  }
+  
+  .agenda-modal-right-section-mobile {
+    max-height: none !important;
+    padding-right: 0 !important;
+  }
+  
+  .agenda-modal-program-title-mobile {
+    font-size: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .agenda-modal-event-mobile {
+    padding: 1.2rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .agenda-modal-event-time-mobile {
+    font-size: 0.9rem !important;
+  }
+  
+  .agenda-modal-event-title-mobile {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .agenda-modal-event-description-mobile {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .agenda-modal-event-speaker-mobile {
+    font-size: 0.9rem !important;
+  }
+  
+  /* Speaker modal mobile optimization */
+  .speaker-modal-content-mobile {
+    padding: 1.5rem !important;
+  }
+  
+  .speaker-modal-image-mobile {
+    width: 200px !important;
+    height: 200px !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .speaker-modal-name-mobile {
+    font-size: 2rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .speaker-modal-title-mobile {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .speaker-modal-company-mobile {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .speaker-modal-section-title-mobile {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .speaker-modal-topic-mobile {
+    font-size: 1rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .speaker-modal-bio-mobile {
+    font-size: 0.9rem !important;
+  }
+  
+  .speaker-modal-day-mobile {
+    margin-top: 1.5rem !important;
+    padding: 0.8rem !important;
+  }
+  
+  .speaker-modal-day-text-mobile {
+    font-size: 1rem !important;
+  }
+}
+
+/* Speakers responsive margin */
+.speakers-container {
+  margin-top: -50px !important;
+}
+
+@media (max-width: 768px) {
+  .speakers-container {
+    margin-top: -10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .speakers-container {
+    margin-top: -10px !important;
+  }
+}

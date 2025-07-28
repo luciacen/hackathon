@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Test Agent</title>
+    </head>
+    <body>
+        <h1>Test Agent</h1>
+        <elevenlabs-convai agent-id="agent_01jzv0c661f53vxkxr2hmygnre"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+        
+        <script>
+            // Funzione per creare l'observer
+            function createObserver() {
+                // Trova l'elemento elevenlabs-convai
+                const convaiElement = document.querySelector('elevenlabs-convai');
+                
+                if (!convaiElement) {
+                    console.log('Elemento elevenlabs-convai non trovato, riprovo tra 1 secondo...');
+                    setTimeout(createObserver, 1000);
+                    return;
+                }
+                
+                console.log('Elemento elevenlabs-convai trovato, creo l\'observer...');
+                
+                // Funzione per monitorare il shadow root
+                function observeShadowRoot() {
+                    // Controlla se esiste un shadow root
+                    const shadowRoot = convaiElement.shadowRoot;
+                    
+                    if (!shadowRoot) {
+                        console.log('Shadow root non ancora disponibile, riprovo tra 500ms...');
+                        setTimeout(observeShadowRoot, 500);
+                        return;
+                    }
+                    
+                    console.log('Shadow root trovato, creo l\'observer per il shadow DOM...');
+                    
+                    // Prima controlla se il button esiste già
+                    const existingButton = shadowRoot.querySelector('button[aria-label="Parlami"]');
+                    if (existingButton) {
+                        console.log('🎯 BUTTON "PARLAMI" GIÀ PRESENTE!', existingButton);
+                        console.log('Tutte le classi del button:', existingButton.className);
+                        console.log('🖱️ Forzando click sul button esistente...');
+                        existingButton.click();
+                        console.log('✅ Click eseguito sul button esistente');
+                    }
+                    
+                    // Crea l'observer per monitorare le modifiche nel shadow DOM
+                    const observer = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            // Controlla se sono stati aggiunti dei nodi
+                            if (mutation.type === 'childList') {
+                                mutation.addedNodes.forEach((node) => {
+                                    // Controlla se il nodo aggiunto è un button
+                                    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'BUTTON') {
+                                        console.log('🔍 Nuovo button trovato:', node.getAttribute('aria-label'));
+                                        
+                                        // Controlla se il button ha aria-label="Parlami"
+                                        if (node.getAttribute('aria-label') === 'Parlami') {
+                                            console.log('🎯 BUTTON "PARLAMI" TROVATO!', node);
+                                            console.log('Contenuto del button:', node.innerHTML);
+                                            console.log('Tutte le classi del button:', node.className);
+                                            console.log('ID del button:', node.id);
+                                            
+                                            // Forza un click sul button
+                                            console.log('🖱️ Forzando click sul button...');
+                                            node.click();
+                                            console.log('✅ Click eseguito sul button "Parlami"');
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                    
+                    // Configura l'observer per monitorare il shadow root
+                    const config = {
+                        childList: true,
+                        subtree: true
+                    };
+                    
+                    // Avvia l'observer sul shadow root
+                    observer.observe(shadowRoot, config);
+                    
+                    console.log('Observer creato e attivo per il shadow DOM di elevenlabs-convai');
+                    
+                    // Controlla anche tutti i button esistenti nel shadow root
+                    const allButtons = shadowRoot.querySelectorAll('button');
+                    console.log('📋 Button esistenti nel shadow root:', allButtons.length);
+                    allButtons.forEach((button, index) => {
+                        console.log(`Button ${index}:`, button.getAttribute('aria-label'), '- Classi:', button.className);
+                    });
+                }
+                
+                // Avvia il monitoraggio del shadow root
+                observeShadowRoot();
+            }
+            
+            // Avvia l'observer quando il DOM è pronto
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', createObserver);
+            } else {
+                createObserver();
+            }
+        </script>
+    </body>
+</html>
