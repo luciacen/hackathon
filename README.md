@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 CreativeHub Hackathon 2025
 
-## Getting Started
+Un sito web moderno e interattivo per l'hackathon organizzato da **EssilorLuxottica** e **CreativeHub**. Il progetto presenta un design pixel-art innovativo con animazioni fluide e un'interfaccia user-friendly.
 
-First, run the development server:
+## 📋 Descrizione
 
+Questo progetto è un sito web per l'hackathon 2025 che combina:
+- **Design pixel-art** con animazioni ondulatorie
+- **Interfaccia moderna** con componenti React
+- **Animazioni fluide** utilizzando GSAP
+- **Responsive design** ottimizzato per tutti i dispositivi
+
+## 🛠️ Tecnologie Utilizzate
+
+- **Framework**: Next.js 15.3.5
+- **Linguaggio**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animazioni**: GSAP 3.13.0
+- **React**: v19.0.0
+- **Build Tool**: Turbopack
+
+## 🚀 Come Avviare il Progetto
+
+### Prerequisiti
+- Node.js (versione 18 o superiore)
+- npm o yarn
+
+### Installazione
+
+1. **Clona il repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [URL_DEL_REPOSITORIO]
+cd hackathon
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Installa le dipendenze**
+```bash
+npm install
+# oppure
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Avvia il server di sviluppo**
+```bash
+npm run dev
+# oppure
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Apri il browser**
+Il sito sarà disponibile all'indirizzo: `http://localhost:3000`
 
-## Learn More
+## 📁 Struttura del Progetto
 
-To learn more about Next.js, take a look at the following resources:
+```
+hackathon/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx          # Layout principale
+│   │   ├── page.tsx            # Pagina principale
+│   │   └── globals.css         # Stili globali
+│   └── components/
+│       ├── Top.tsx             # Componente header
+│       ├── Intro.tsx           # Sezione introduzione
+│       ├── Location.tsx        # Sezione location
+│       ├── Speakers.tsx        # Sezione speakers
+│       ├── Brief.tsx           # Sezione brief
+│       ├── Hero.tsx            # Componente hero con animazioni
+│       ├── Wave.tsx            # Componente onde
+│       └── AgendaOverlay.tsx   # Overlay agenda
+├── public/
+│   ├── assets/                 # Immagini e risorse
+│   └── fonts/                  # Font personalizzati
+├── res/                        # Risorse del progetto
+└── package.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Caratteristiche Principali
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Design Pixel-Art
+- **Canvas animato** con pattern pixel personalizzati
+- **Animazioni ondulatorie** per i blocchi blu
+- **Responsive** che si adatta a tutti i dispositivi
 
-## Deploy on Vercel
+### Componenti Interattivi
+- **Hero Section** con animazioni fluide
+- **Sezioni informative** per location, speakers e brief
+- **Overlay agenda** per la gestione degli eventi
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Performance
+- **Turbopack** per build veloci
+- **Ottimizzazioni** per caricamento rapido
+- **Lazy loading** per le immagini
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 Sezioni del Sito
+
+1. **Top** - Header con logo e navigazione
+2. **Intro** - Introduzione all'hackathon
+3. **Location** - Informazioni sulla sede
+4. **Speakers** - Presentazione degli speaker
+5. **Brief** - Dettagli del brief di progetto
+
+## 🚀 Script Disponibili
+
+```bash
+# Sviluppo
+npm run dev          # Avvia server di sviluppo con Turbopack
+
+# Build
+npm run build        # Crea build di produzione
+npm run start        # Avvia server di produzione
+
+# Linting
+npm run lint         # Esegue ESLint
+```
+
+## 📱 Responsive Design
+
+Il sito è completamente responsive e ottimizzato per:
+- **Desktop** (1920px+)
+- **Tablet** (768px - 1024px)
+- **Mobile** (320px - 767px)
+
+## 🎨 Personalizzazione
+
+### Font
+- **Avenir Next Cyr** - Font principale
+- **Dogica** - Font pixel per elementi speciali
+
+### Colori
+- **Blu principale**: `#3B82F6` (Tailwind blue-400)
+- **Bianco**: `#FFFFFF`
+- **Grigi**: Varianti di grigio per testo e sfondi
+
+## 📄 Licenza
+
+Questo progetto è sviluppato per l'hackathon **EssilorLuxottica x CreativeHub 2025**.
+
+## 👥 Team
+
+- **EssilorLuxottica** - Partner principale
+- **CreativeHub** - Organizzatore dell'hackathon
+
+## 📞 Contatti
+
+Per maggiori informazioni sull'hackathon:
+- **CreativeHub**: [Sito web]
+- **EssilorLuxottica**: [Sito web]
+
+---
+
+*Sviluppato con ❤️ per l'innovazione e la creatività*
