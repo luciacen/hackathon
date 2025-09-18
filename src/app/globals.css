@@ -2,50 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Avenir Next Cyr fonts */
+/* Avenir Next Regular */
 @font-face {
-    font-family: 'Avenir Next Cyr';
-    src: url('/fonts/avenir/AvenirNextCyr-Light.woff2') format('woff2'),
-        url('/fonts/avenir/AvenirNextCyr-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Avenir Next';
+  src: url('/hackathon/fonts/AvenirNext-Regular.woff2') format('woff2'),
+       url('/hackathon/fonts/AvenirNext-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
+/* Avenir Next Medium */
 @font-face {
-    font-family: 'Avenir Next Cyr';
-    src: url('/fonts/avenir/AvenirNextCyr-Regular.woff2') format('woff2'),
-        url('/fonts/avenir/AvenirNextCyr-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Avenir Next';
+  src: url('/hackathon/fonts/AvenirNext-Medium.woff2') format('woff2'),
+       url('/hackathon/fonts/AvenirNext-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
+/* Avenir Next Bold */
 @font-face {
-    font-family: 'Avenir Next Cyr';
-    src: url('/fonts/avenir/AvenirNextCyr-Medium.woff2') format('woff2'),
-        url('/fonts/avenir/AvenirNextCyr-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Avenir Next';
+  src: url('/hackathon/fonts/AvenirNext-Bold.woff2') format('woff2'),
+       url('/hackathon/fonts/AvenirNext-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
+/* Avenir Next Italic */
 @font-face {
-    font-family: 'Avenir Next Cyr';
-    src: url('/fonts/avenir/AvenirNextCyr-Bold.woff2') format('woff2'),
-        url('/fonts/avenir/AvenirNextCyr-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Avenir Next';
+  src: url('/hackathon/fonts/AvenirNext-Italic.woff2') format('woff2'),
+       url('/hackathon/fonts/AvenirNext-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 
+/* Dogica Pixel Regular */
 @font-face {
-    font-family: 'Avenir Next Cyr';
-    src: url('/fonts/avenir/AvenirNextCyr-Thin.woff2') format('woff2'),
-        url('/fonts/avenir/AvenirNextCyr-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Dogica Pixel';
+  src: url('/hackathon/fonts/dogicapixel.woff2') format('woff2'),
+       url('/hackathon/fonts/dogicapixel.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Dogica Pixel Regular */
+@font-face {
+  font-family: 'Dogica Pixel';
+  src: url('/hackathon/fonts/dogicapixelbold.woff2') format('woff2'),
+       url('/hackathon/fonts/dogicapixelbold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Reset and viewport fixes */
@@ -58,12 +71,11 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  font-family: 'Avenir Next Cyr', 'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
-  font-family: 'Avenir Next Cyr', 'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Ensure all elements respect viewport */
@@ -77,11 +89,6 @@ body {
   .logo-mobile {
     width: 140px !important;
     height: 42px !important;
-  }
-  
-  .hackathon-logo-mobile {
-    transform: scale(0.7);
-    transform-origin: left center;
   }
   
   .header-mobile {
@@ -98,7 +105,7 @@ body {
   }
   
   .subtitle-mobile {
-    font-size: 1rem !important;
+    font-size: 2rem !important;
   }
   
   .logo-container-mobile {
@@ -118,11 +125,11 @@ body {
   }
   
   .day-title-mobile {
-    font-size: 1.8rem !important;
+    font-size: 1.4rem !important;
   }
   
   .day-subtitle-mobile {
-    font-size: 0.9rem !important;
+    font-size: 0.7rem !important;
   }
   
   /* Intro section mobile optimization */
@@ -174,6 +181,15 @@ body {
   
   /* Panel grid mobile optimization */
   .panel-grid-mobile {
+  /* Footer mobile optimization */
+  @media (max-width: 768px) {
+      .footer-mobile {
+        flex-direction: column; /* Cambia layout in colonna per mobile */
+        align-items: center; /* Centra i loghi su mobile */
+        gap: 1rem; /* Aggiungi spazio tra i loghi */
+      }
+    }
+
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1rem !important;
   }
@@ -280,7 +296,7 @@ body {
   .agenda-modal-left-section-mobile {
     position: static !important;
     padding: 0 !important;
-    margin-bottom: 2rem !important;
+    margin-bottom: 1rem !important;
   }
   
   .agenda-modal-day-banner-mobile {
@@ -294,12 +310,12 @@ body {
   
   .agenda-modal-day-of-week-mobile {
     font-size: 2.2rem !important;
-    margin-top: 1rem !important;
+    margin-top: 0 !important;
   }
   
   .agenda-modal-date-mobile {
     font-size: 1.2rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
   }
   
   .agenda-modal-subtitle-mobile {
