@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AgendaOverlay from './AgendaOverlay';
@@ -25,10 +25,6 @@ const Intro: React.FC = () => {
   const [isAgendaOpen, setIsAgendaOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState<number>(1);
   const [cardsAnimated, setCardsAnimated] = useState(false);
-  const isIOS = useMemo(() => {
-    if (typeof navigator === 'undefined') return false;
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && (navigator as any).maxTouchPoints > 1);
-  }, []);
 
   useEffect(() => {
     setIsClient(true);
@@ -68,17 +64,9 @@ const Intro: React.FC = () => {
       if (rightPanelRef.current && introRef.current) {        
         // Imposta la posizione iniziale (fuori dallo schermo a destra)
         gsap.set(rightPanelRef.current, {
-          xPercent: 100,
-          force3D: true
+          x: '100%',
+          // backgroundColor: 'white'
         });
-        if (isIOS) {
-          gsap.set(rightPanelRef.current, {
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            display: 'flex'
-          });
-        }
         // Crea ScrollTrigger che si attiva quando il componente diventa sticky
         ScrollTrigger.create({
           trigger: introRef.current,
@@ -86,36 +74,25 @@ const Intro: React.FC = () => {
           end: 'bottom top', // Fino a quando il componente esce dal top
           scrub: 1,
           onUpdate: (self) => {
-            const progress = self.progress;
+            const progress = self.progress;            
             const normalizedProgress = Math.min(progress * 2, 1);
-            const newXPercent = 100 - (normalizedProgress * 100);
+            const newX = `${100 - (normalizedProgress * 100)}%`;
             gsap.set(rightPanelRef.current, {
-              xPercent: newXPercent,
-              force3D: true
+              x: newX
             });
-
+            
             // Quando completamente in vista, cambia posizione
-            if (!isIOS) {
-              if (normalizedProgress >= 1) {
-                gsap.set(rightPanelRef.current, {
-                  position: 'absolute',
-                  top: '100vh',
-                  right: '0px',
-                  display: 'flex'
-                });
-              } else {
-                // Mantieni sempre fixed durante l'animazione (solo non-iOS)
-                gsap.set(rightPanelRef.current, {
-                  position: 'fixed',
-                  top: 0,
-                  right: 0,
-                  display: 'flex'
-                });
-              }
-            } else {
-              // Su iOS evitiamo position: fixed per affidabilità
+            if (normalizedProgress >= 1) {
               gsap.set(rightPanelRef.current, {
                 position: 'absolute',
+                top: '100vh',
+                right: '0px',
+                display: 'flex'
+              });
+            } else {
+              // Mantieni sempre fixed durante l'animazione
+              gsap.set(rightPanelRef.current, {
+                position: 'fixed',
                 top: 0,
                 right: 0,
                 display: 'flex'
@@ -125,42 +102,12 @@ const Intro: React.FC = () => {
           onLeave: () => {
             // Quando il componente esce dal viewport, fai uscire il pannello
             gsap.to(rightPanelRef.current, {
-              xPercent: 100,
+              x: '0',
               duration: 0.5,
               ease: 'power2.inOut'
             });
           }
         });
-        // Forza un refresh dopo il setup per iOS Safari
-        ScrollTrigger.refresh();
-
-        // Fallback nativo per iOS: calcolo manuale della progressione scroll -> xPercent
-        let startY = 0;
-        let endY = 0;
-        const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
-        const updateBounds = () => {
-          if (!introRef.current) return;
-          const rect = introRef.current.getBoundingClientRect();
-          // offsetTop è relativo al documento; rect.top è relativo al viewport
-          const docTop = window.scrollY + rect.top;
-          startY = docTop; // quando la sezione tocca il top
-          // fine quando il bottom della sezione tocca il top del viewport
-          endY = docTop + introRef.current.offsetHeight - window.innerHeight;
-        };
-        const nativeScrollHandler = () => {
-          if (!isIOS || !rightPanelRef.current) return;
-          const y = window.scrollY;
-          const rawProgress = (y - startY) / Math.max(1, (endY - startY));
-          const progress = clamp(rawProgress, 0, 1);
-          const normalizedProgress = Math.min(progress * 2, 1);
-          const newXPercent = 100 - (normalizedProgress * 100);
-          gsap.set(rightPanelRef.current, { xPercent: newXPercent, force3D: true });
-        };
-        if (isIOS) {
-          updateBounds();
-          nativeScrollHandler();
-          window.addEventListener('scroll', nativeScrollHandler, { passive: true });
-        }
       } else {
         setTimeout(setupPanel, 100);
       }
@@ -187,34 +134,8 @@ const Intro: React.FC = () => {
           }
         });
 
-        const handleResize = () => {
-          // Aggiorna i calcoli quando cambia la UI di Safari (barra indirizzi)
-          ScrollTrigger.refresh();
-        };
-        const onResize = () => {
-          handleResize();
-          if (isIOS) {
-            updateBounds();
-            nativeScrollHandler();
-          }
-        };
-        const onOrientation = () => {
-          handleResize();
-          if (isIOS) {
-            updateBounds();
-            nativeScrollHandler();
-          }
-        };
-        window.addEventListener('resize', onResize);
-        window.addEventListener('orientationchange', onOrientation);
-
         return () => {
           observer.disconnect();
-          window.removeEventListener('resize', onResize);
-          window.removeEventListener('orientationchange', onOrientation);
-          if (isIOS) {
-            window.removeEventListener('scroll', nativeScrollHandler as any);
-          }
           ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
   }, [isClient]);
@@ -375,11 +296,7 @@ const Intro: React.FC = () => {
             zIndex: 999,
             display: 'flex',
             flexDirection: 'row',
-            pointerEvents: 'none',
-            willChange: 'transform',
-            transform: 'translateZ(0)',
-            WebkitBackfaceVisibility: 'hidden' as any,
-            backfaceVisibility: 'hidden'
+            pointerEvents: 'none'
           }}
         >
           {/* Immagini pixel SX e DX */}
@@ -391,7 +308,6 @@ const Intro: React.FC = () => {
             style={{
               height: '100vh',
               width: 'auto',
-              transform: 'scaleX(-1)',
               objectFit: 'contain',
               pointerEvents: 'none',
               userSelect: 'none'
@@ -428,8 +344,11 @@ const Intro: React.FC = () => {
                   color: '#4d68f1'
                 }}
               >
-                30.09 - 03.10<br />
-                Museo della Scienza e della Tecnologia
+                <span style={{
+                  fontWeight: '400'
+                }}>30.09 - 03.10</span>
+                <br />
+                Discover the Agenda
               </h2>
               
               {/* Programma dell'evento - 4 colonne */}
@@ -479,7 +398,7 @@ const Intro: React.FC = () => {
                     fontWeight: 'bold',
                     color: '#fff',
                     fontFamily: "'Dogica Pixel', monospace",
-                    marginBottom: '0.5rem',
+                    marginBottom: '1rem',
                     letterSpacing: '2px',
                     textAlign: 'center'
                   }} className="day-title-mobile">
@@ -532,7 +451,7 @@ const Intro: React.FC = () => {
                     fontWeight: 'bold',
                     color: '#fff',
                     fontFamily: "'Dogica Pixel', monospace",
-                    marginBottom: '0.5rem',
+                    marginBottom: '1rem',
                     letterSpacing: '2px',
                     textAlign: 'center'
                   }} className="day-title-mobile">
@@ -585,7 +504,7 @@ const Intro: React.FC = () => {
                     fontWeight: 'bold',
                     color: '#fff',
                     fontFamily: "'Dogica Pixel', monospace",
-                    marginBottom: '0.5rem',
+                    marginBottom: '1rem',
                     letterSpacing: '2px',
                     textAlign: 'center'
                   }} className="day-title-mobile">
@@ -599,7 +518,7 @@ const Intro: React.FC = () => {
                     fontFamily: "'Dogica Pixel', monospace",
                     textAlign: 'center'
                   }} className="day-subtitle-mobile">
-                    Presentation
+                    Presentation<br></br>&nbsp;
                   </div>
                 </div>
                 {/* DAY 4 */}
@@ -638,7 +557,7 @@ const Intro: React.FC = () => {
                     fontWeight: 'bold',
                     color: '#fff',
                     fontFamily: "'Dogica Pixel', monospace",
-                    marginBottom: '0.5rem',
+                    marginBottom: '1rem',
                     letterSpacing: '2px',
                     textAlign: 'center'
                   }} className="day-title-mobile">
@@ -652,14 +571,14 @@ const Intro: React.FC = () => {
                     fontFamily: "'Dogica Pixel', monospace",
                     textAlign: 'center'
                   }} className="day-subtitle-mobile">
-                    Awards
+                    Awards<br></br>&nbsp;
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <Image
-            src={`${assetPrefix}assets/intro-sx.svg`}
+            src={`${assetPrefix}assets/intro-dx.svg`}
             alt="Intro DX"
             width={1920}
             height={1080}

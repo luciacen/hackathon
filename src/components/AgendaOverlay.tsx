@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 interface AgendaOverlayProps {
@@ -159,16 +159,6 @@ const AgendaOverlay: React.FC<AgendaOverlayProps> = ({ isOpen, onClose, day }) =
     );
   };
 
-  // Rileva viewport mobile per applicare padding/margini ridotti
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(max-width: 768px)');
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
   useEffect(() => {
     // Blocca lo scroll della pagina sottostante quando l'overlay è aperto,
     // MA con un delay pari alla durata dell'animazione di apertura per evitare lag.
@@ -286,7 +276,7 @@ const AgendaOverlay: React.FC<AgendaOverlayProps> = ({ isOpen, onClose, day }) =
         top: 0,
         left: 0,
         width: '100vw',
-        height: '100vh',
+        height: '100lvh',
         zIndex: 9999,
         display: 'none',
         justifyContent: 'center',
@@ -317,7 +307,7 @@ const AgendaOverlay: React.FC<AgendaOverlayProps> = ({ isOpen, onClose, day }) =
           backgroundColor: '#0a0a0a',
           borderRadius: 0,
           width: '100vw',
-          height: '100vh',
+          height: '100lvh',
           overflow: 'auto',
           padding: '3rem',
           boxShadow: '0 0 0 6px rgba(77,104,241,0.2), 0 20px 60px rgba(0, 0, 0, 0.5)',
@@ -483,8 +473,9 @@ const AgendaOverlay: React.FC<AgendaOverlayProps> = ({ isOpen, onClose, day }) =
               flexDirection: 'column',
               justifyContent: 'flex-start',
               overflowY: 'auto',
-              maxHeight: 'calc(100vh - 8rem)',
+              maxHeight: 'calc(100lvh - 8rem)',
               paddingRight: '1rem',
+              paddingBottom: '4rem',
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent'
             }}

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 
 interface Speaker {
   id: number;
@@ -157,14 +158,12 @@ const Speakers: React.FC = () => {
           width: '100%',
           position: 'relative'
         }}>
-          <img 
+          <Image 
             src="/assets/pixels-blue-bottom.svg" 
             alt="Pixel pattern top"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block'
-            }}
+            layout="fill"
+            objectFit="cover"
+            priority
           />
         </div>
 
@@ -232,26 +231,18 @@ const Speakers: React.FC = () => {
                   position: 'relative',
                   overflow: 'hidden'
                 }}>
-                  <img 
+                  <Image 
                     src={speaker.image}
                     alt={speaker.name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
+                    layout="fill"
+                    objectFit="cover"
                   />
-                  <img 
+                  <Image 
                     src="/assets/maschera-speaker.png"
                     alt=""
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
+                    layout="fill"
+                    objectFit="cover"
+                    priority
                   />
                 </div>
 
@@ -291,14 +282,12 @@ const Speakers: React.FC = () => {
           width: '100%',
           position: 'relative'
         }}>
-          <img 
+          <Image 
             src="/assets/pixels-blue-top.svg" 
             alt="Pixel pattern bottom"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block'
-            }}
+            layout="fill"
+            objectFit="cover"
+            priority
           />
         </div>
       </div>
@@ -310,7 +299,7 @@ const Speakers: React.FC = () => {
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
+          height: '100svh',
           backgroundColor: 'white',
           display: 'flex',
           alignItems: 'center',
@@ -370,26 +359,18 @@ const Speakers: React.FC = () => {
                 marginBottom: '2rem'
               }}
             >
-              <img 
+              <Image 
                 src={selectedSpeaker.image}
                 alt={selectedSpeaker.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
+                layout="fill"
+                objectFit="cover"
               />
-              <img 
+              <Image 
                 src="/assets/maschera-speaker.png"
                 alt=""
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
+                layout="fill"
+                objectFit="cover"
+                priority
               />
             </div>
 
@@ -510,4 +491,4 @@ const Speakers: React.FC = () => {
   );
 };
 
-export default Speakers; 
+export default Speakers;

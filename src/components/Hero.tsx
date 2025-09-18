@@ -121,7 +121,7 @@ const Hero = () => {
         <div className="mt-8 flex flex-col items-center">
           <p className="max-w-xl text-center text-lg text-black font-normal hero-text-mobile">
             Prepare for a reality shift.<br />
-            You're invited to a gathering of bold minds to rethink and reshape the future of eyewear. Expect disruption. Embrace the unexpected. Get ready to build something the world hasn't seen before.
+            You&apos;re invited to a gathering of bold minds to rethink and reshape the future of eyewear. Expect disruption. Embrace the unexpected. Get ready to build something the world hasn&apos;t seen before.
           </p>
         </div>
 
@@ -136,4 +136,4 @@ const Hero = () => {
   );
 };
 
-export default Hero; 
+export default Hero;

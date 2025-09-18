@@ -426,3 +426,10 @@ body {
     margin-top: -10px !important;
   }
 }
+
+
+@media (max-width: 768px) {
+  .hackathon-logo-mobile {
+    width: 80% !important; /* Rende il logo più grande su mobile */
+  }
+}

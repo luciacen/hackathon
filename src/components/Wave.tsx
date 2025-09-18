@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { assetPrefix } from '../../next.config';
 
 interface Pixel {
   x: number;
@@ -31,7 +32,7 @@ const Wave: React.FC = () => {
 
     // Carica l'immagine SVG pixels
     const pixelsImage = new Image();
-    pixelsImage.src = '/assets/pixels.svg';
+    pixelsImage.src = assetPrefix + '/assets/hero-pixel.svg';
 
     const pixels: Pixel[] = [];
     const pixelSize = 10; // Aumentato da 4 a 8 (doppio)
@@ -40,8 +41,9 @@ const Wave: React.FC = () => {
     // Funzione per creare nuovi pixel
     const createPixel = () => {
       const x = Math.random() * canvas.width;
-      const size = Math.random() > 0.7 ? pixelSize * 2 : pixelSize; // 30% chance di pixel più grandi (20px)
-      const speed = 1 + Math.random() * 2;
+      // const size = Math.random() > 0.7 ? pixelSize * 2 : pixelSize; // 30% chance di pixel più grandi (20px)
+      const size = (16.9 * window.innerWidth) / 1155.65; // Fissato a 20px
+      const speed = 1 + Math.random() ;
       
       pixels.push({
         x,
@@ -75,26 +77,12 @@ const Wave: React.FC = () => {
 
       // Disegna l'immagine SVG pixels come background
       if (pixelsImage.complete) {
-        // Calcola le dimensioni per mantenere le proporzioni
-        const imageAspectRatio = pixelsImage.width / pixelsImage.height;
-        const canvasAspectRatio = canvas.width / canvas.height;
-        
-        let drawWidth, drawHeight, drawX, drawY;
-        
-        if (imageAspectRatio > canvasAspectRatio) {
-          // L'immagine è più larga, adatta alla larghezza
-          drawWidth = canvas.width;
-          drawHeight = canvas.width / imageAspectRatio;
-          drawX = 0;
-          drawY = canvas.height - drawHeight + 50; // Posiziona più in basso (+50px)
-        } else {
-          // L'immagine è più alta, adatta all'altezza
-          drawHeight = canvas.height;
-          drawWidth = canvas.height * imageAspectRatio;
-          drawX = (canvas.width - drawWidth) / 2; // Centra orizzontalmente
-          drawY = 50; // Posiziona più in basso (+50px)
-        }
-        
+        // Calcola la larghezza e l'altezza per mantenere le proporzioni
+        const drawWidth = canvas.width;
+        const drawHeight = drawWidth * (pixelsImage.height / pixelsImage.width);
+        const drawX = 0;
+        const drawY = canvas.height - drawHeight; // Posiziona l'immagine in basso
+
         ctx.drawImage(pixelsImage, drawX, drawY, drawWidth, drawHeight);
       }
 
@@ -104,7 +92,7 @@ const Wave: React.FC = () => {
       }
 
       // Aggiorna e disegna i pixel
-      pixels.forEach((pixel, index) => {
+      pixels.forEach(pixel => {
         if (!pixel.landed) {
           pixel.y += pixel.speed;
           
@@ -155,4 +143,4 @@ const Wave: React.FC = () => {
   );
 };
 
-export default Wave; 
+export default Wave;

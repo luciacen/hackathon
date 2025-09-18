@@ -1,18 +1,15 @@
-import Image from "next/image";
 import Top from "@/components/Top";
 import Intro from "@/components/Intro";
-import Location from "@/components/Location";
-import Speakers from "@/components/Speakers";
-import Brief from "@/components/Brief";
+import LocationNoMap from "@/components/Location_nomap";
 
 export default function Home() {
   return (
     <>
       <Top />
       <Intro />
-      <Location />
-      <Speakers />
-      <Brief />
+      <LocationNoMap />
+      {/* <Speakers />
+      <Brief /> */}
     </>
   );
 }

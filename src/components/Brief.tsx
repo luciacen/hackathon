@@ -246,7 +246,7 @@ const Brief: React.FC = () => {
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
+          height: '100svh',
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
           display: 'flex',
           alignItems: 'center',
@@ -259,7 +259,7 @@ const Brief: React.FC = () => {
           <div style={{
             backgroundColor: '#4d68f1',
             width: '100vw',
-            height: '100vh',
+            height: '100svh',
             overflow: 'auto',
             color: 'white',
             position: 'relative',
